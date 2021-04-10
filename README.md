@@ -9,4 +9,4 @@ Requirements:
 
 Visual studio
 
-FoodTrck DataBase
+FoodTruck DataBase
