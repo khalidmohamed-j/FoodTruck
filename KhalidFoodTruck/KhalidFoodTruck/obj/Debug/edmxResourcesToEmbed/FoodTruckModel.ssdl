@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FoodTruckModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="FoodTruckModelStoreContainer">
+    <EntitySet Name="FoodTypes" EntityType="FoodTruckModel.Store.FoodTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FoodTrucks" EntityType="FoodTruckModel.Store.FoodTrucks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Locations" EntityType="FoodTruckModel.Store.Locations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FoodTruckLocations" EntityType="FoodTruckModel.Store.FoodTruckLocations" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FoodTypeFoodTruck" Association="FoodTruckModel.Store.FoodTypeFoodTruck">
+      <End Role="FoodType" EntitySet="FoodTypes" />
+      <End Role="FoodTruck" EntitySet="FoodTrucks" />
+    </AssociationSet>
+    <AssociationSet Name="LocationFoodTruckLocation" Association="FoodTruckModel.Store.LocationFoodTruckLocation">
+      <End Role="Location" EntitySet="Locations" />
+      <End Role="FoodTruckLocation" EntitySet="FoodTruckLocations" />
+    </AssociationSet>
+    <AssociationSet Name="FoodTruckFoodTruckLocation" Association="FoodTruckModel.Store.FoodTruckFoodTruckLocation">
+      <End Role="FoodTruck" EntitySet="FoodTrucks" />
+      <End Role="FoodTruckLocation" EntitySet="FoodTruckLocations" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="FoodTypes">
+    <Key>
+      <PropertyRef Name="FoodTypeID" />
+    </Key>
+    <Property Name="FoodTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FoodTypeName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FoodTrucks">
+    <Key>
+      <PropertyRef Name="FoodTruckID" />
+    </Key>
+    <Property Name="FoodTruckID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FoodTruckName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FoodTruckPlateNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FoodTypeID" Type="int" Nullable="false" />
+    <Property Name="FoodType_FoodTypeID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Locations">
+    <Key>
+      <PropertyRef Name="LocationID" />
+    </Key>
+    <Property Name="LocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LocationName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LocationAddress" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FoodTruckLocations">
+    <Key>
+      <PropertyRef Name="FoodTruckLocationID" />
+    </Key>
+    <Property Name="FoodTruckLocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FoodTruckLocationDay" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LocationID" Type="int" Nullable="false" />
+    <Property Name="FoodTruckID" Type="int" Nullable="false" />
+    <Property Name="Location_LocationID" Type="int" Nullable="false" />
+    <Property Name="FoodTruck_FoodTruckID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FoodTypeFoodTruck">
+    <End Role="FoodType" Type="FoodTruckModel.Store.FoodTypes" Multiplicity="1" />
+    <End Role="FoodTruck" Type="FoodTruckModel.Store.FoodTrucks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FoodType">
+        <PropertyRef Name="FoodTypeID" />
+      </Principal>
+      <Dependent Role="FoodTruck">
+        <PropertyRef Name="FoodType_FoodTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LocationFoodTruckLocation">
+    <End Role="Location" Type="FoodTruckModel.Store.Locations" Multiplicity="1" />
+    <End Role="FoodTruckLocation" Type="FoodTruckModel.Store.FoodTruckLocations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="LocationID" />
+      </Principal>
+      <Dependent Role="FoodTruckLocation">
+        <PropertyRef Name="Location_LocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FoodTruckFoodTruckLocation">
+    <End Role="FoodTruck" Type="FoodTruckModel.Store.FoodTrucks" Multiplicity="1" />
+    <End Role="FoodTruckLocation" Type="FoodTruckModel.Store.FoodTruckLocations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FoodTruck">
+        <PropertyRef Name="FoodTruckID" />
+      </Principal>
+      <Dependent Role="FoodTruckLocation">
+        <PropertyRef Name="FoodTruck_FoodTruckID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

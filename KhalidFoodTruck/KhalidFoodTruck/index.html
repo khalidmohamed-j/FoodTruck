@@ -1,0 +1,117 @@
+﻿<DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Note App</title>
+        <link rel="stylesheet" type="text/css" href="Content/Site.css">
+        <link rel="stylesheet" type="text/css" href="Content/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="Content/bootstrap-theme.min.css">
+    </head>
+    <body>
+
+        <div class="jumbotron" id="jumbotron">
+            <h1 class="display-4">Khalid's Food Truck!</h1>
+            <h2 class="display-4">Are you hungry? Then make an Order!</h2>
+        </div>
+
+        <div class="wrapper">
+
+            <div class="box1">
+                <h3>All Food Trucks</h3>
+                <ul id="foodTrucks" class="list-group" /> <br />
+            </div>
+
+            <!--<div class="box5">
+        <h3>All Food Truck Locations</h3>
+        <ul id="foodTruckLocations" class="list-group" /> <br />
+    </div>-->
+
+            <div class="box2">
+                <h3>Search Food Truck by Id</h3>
+                <input type="text" id="foodTruckId" size="5" />
+                <input type="button" value="Search" class="btn btn-info" onclick="find();" />
+                <p id="foodTruck" />
+            </div>
+
+            <!--<div class="box5">
+        <h3>Search Location by Id</h3>
+        <input type="text" id="locationId" size="5" />
+        <input type="button" value="Search" class="btn btn-info" onclick="find();" />
+        <p id="location" />
+    </div>-->
+
+            <div class="box3">
+                <h3>Delete a Food Truck by Id</h3>
+                <input type="text" id="deleteId" size="5" />
+                <input type="button" value="Delete" class="btn btn-danger" onclick="deleteItem();" />
+            </div>
+
+            <div class="box4">
+                <h3>Add a Food Truck</h3>
+                TruckName: <input type="text" id="truckName" size="60" /> <br />
+                <br />
+                PlateNumber: <input type="text" id="plateNumber" size="60" /> <br />
+                <br />
+                <label for="select-foodType">Select Food Type</label>
+                <select name="select-foodType" id="select-foodType">
+                    <option value="0"></option>
+                    <option value="1">Pizza</option>
+                    <option value="2">Tacos</option>
+                    <option value="3">Gyro</option>
+                    <option value="4">Pasta</option>
+                </select> <br /><!--&emsp; &emsp;-->
+                <br />
+                <input type="button" value="Add New" class="btn btn-primary" onclick="addItem();" />
+
+            </div>
+
+            <!--<div class="box6">
+    <h3>Add a Day for Food Truck</h3>
+    foodTruckLocationDay: <input type="text" id="foodTruckLocationDay" size="60" /> <br />
+    <input type="button" value="Add New" class="btn btn-primary" onclick="addItemDay();" />
+    <label for="select-foodTruckLocationDay">Select Food Type</label>
+    <select name="select-foodTruckLocationDay" id="select-foodTruckLocationDay">
+        <option value="1">Monday</option>
+        <option value="2">Tuesday</option>
+        <option value="3">Wednesday</option>
+        <option value="4">Thursday</option>
+        <option value="4">Friday</option>
+        <option value="4">Saturday</option>
+        <option value="4">Sunday</option>
+
+    </select> <br />-->
+            <!--&emsp; &emsp;-->
+            <!--</div>-->
+
+            <div class="box7">
+                <h3>Modify - Enter Id of Food Truck to edit</h3>
+                <input type="text" id="modFoodTruckId" size="5" />
+                <input type="button" value="Get Food Truck to Modify" class="btn btn-info" onclick="findModify();" />
+                <p id="foodTruck" />
+            </div>
+
+            <div class="box8">
+                <h3>Modify a Food Truck</h3>
+                TruckName: <input type="text" id="modTruckName" size="60" /> <br />
+                <br />
+                PlateNumber: <input type="text" id="modPlateNumber" size="60" /> <br />
+                <br />
+                <label for="modSelect-foodType">Select a Food Type</label>
+                
+                <select name="modSelect-foodType" id="modSelect-foodType">
+                    <option value="0"></option>
+                    <option value="1">Pizza</option>
+                    <option value="2">Tacos</option>
+                    <option value="3">Gyro</option>
+                    <option value="4">Pasta</option>
+                </select><br />
+                <br />
+                <input type="button" value="Save" class="btn btn-primary" onclick="modify();" /><br />
+                <br />
+
+            </div>
+        </div>
+
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+        <script src="Scripts/main.js"></script>
+    </body>
+</html>

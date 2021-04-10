@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="FoodTruckModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="FoodTruckModelContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="FoodTypes" EntityType="FoodTruckModel.FoodType" />
+    <EntitySet Name="FoodTrucks" EntityType="FoodTruckModel.FoodTruck" />
+    <AssociationSet Name="FoodTypeFoodTruck" Association="FoodTruckModel.FoodTypeFoodTruck">
+      <End Role="FoodType" EntitySet="FoodTypes" />
+      <End Role="FoodTruck" EntitySet="FoodTrucks" />
+    </AssociationSet>
+    <EntitySet Name="Locations" EntityType="FoodTruckModel.Location" />
+    <EntitySet Name="FoodTruckLocations" EntityType="FoodTruckModel.FoodTruckLocation" />
+    <AssociationSet Name="LocationFoodTruckLocation" Association="FoodTruckModel.LocationFoodTruckLocation">
+      <End Role="Location" EntitySet="Locations" />
+      <End Role="FoodTruckLocation" EntitySet="FoodTruckLocations" />
+    </AssociationSet>
+    <AssociationSet Name="FoodTruckFoodTruckLocation" Association="FoodTruckModel.FoodTruckFoodTruckLocation">
+      <End Role="FoodTruck" EntitySet="FoodTrucks" />
+      <End Role="FoodTruckLocation" EntitySet="FoodTruckLocations" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="FoodType">
+    <Key>
+      <PropertyRef Name="FoodTypeID" />
+    </Key>
+    <Property Name="FoodTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FoodTypeName" Type="String" Nullable="false" />
+    <NavigationProperty Name="FoodTrucks" Relationship="FoodTruckModel.FoodTypeFoodTruck" FromRole="FoodType" ToRole="FoodTruck" />
+  </EntityType>
+  <EntityType Name="FoodTruck">
+    <Key>
+      <PropertyRef Name="FoodTruckID" />
+    </Key>
+    <Property Name="FoodTruckID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FoodTruckName" Type="String" Nullable="false" />
+    <Property Name="FoodTruckPlateNumber" Type="String" Nullable="false" />
+    <NavigationProperty Name="FoodType" Relationship="FoodTruckModel.FoodTypeFoodTruck" FromRole="FoodTruck" ToRole="FoodType" />
+    <Property Name="FoodTypeID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="FoodTruckLocations" Relationship="FoodTruckModel.FoodTruckFoodTruckLocation" FromRole="FoodTruck" ToRole="FoodTruckLocation" />
+  </EntityType>
+  <Association Name="FoodTypeFoodTruck">
+    <End Type="FoodTruckModel.FoodType" Role="FoodType" Multiplicity="1" />
+    <End Type="FoodTruckModel.FoodTruck" Role="FoodTruck" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="LocationID" />
+    </Key>
+    <Property Name="LocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LocationName" Type="String" Nullable="false" />
+    <Property Name="LocationAddress" Type="String" Nullable="false" />
+    <NavigationProperty Name="FoodTruckLocations" Relationship="FoodTruckModel.LocationFoodTruckLocation" FromRole="Location" ToRole="FoodTruckLocation" />
+  </EntityType>
+  <EntityType Name="FoodTruckLocation">
+    <Key>
+      <PropertyRef Name="FoodTruckLocationID" />
+    </Key>
+    <Property Name="FoodTruckLocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FoodTruckLocationDay" Type="String" Nullable="false" />
+    <NavigationProperty Name="Location" Relationship="FoodTruckModel.LocationFoodTruckLocation" FromRole="FoodTruckLocation" ToRole="Location" />
+    <NavigationProperty Name="FoodTruck" Relationship="FoodTruckModel.FoodTruckFoodTruckLocation" FromRole="FoodTruckLocation" ToRole="FoodTruck" />
+    <Property Name="LocationID" Type="Int32" Nullable="false" />
+    <Property Name="FoodTruckID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="LocationFoodTruckLocation">
+    <End Type="FoodTruckModel.Location" Role="Location" Multiplicity="1" />
+    <End Type="FoodTruckModel.FoodTruckLocation" Role="FoodTruckLocation" Multiplicity="*" />
+  </Association>
+  <Association Name="FoodTruckFoodTruckLocation">
+    <End Type="FoodTruckModel.FoodTruck" Role="FoodTruck" Multiplicity="1" />
+    <End Type="FoodTruckModel.FoodTruckLocation" Role="FoodTruckLocation" Multiplicity="*" />
+  </Association>
+</Schema>

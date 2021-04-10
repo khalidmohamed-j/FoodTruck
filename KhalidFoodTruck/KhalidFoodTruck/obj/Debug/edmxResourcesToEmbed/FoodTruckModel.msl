@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FoodTruckModelStoreContainer" CdmEntityContainer="FoodTruckModelContainer">
+    <EntitySetMapping Name="FoodTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(FoodTruckModel.FoodType)">
+        <MappingFragment StoreEntitySet="FoodTypes">
+          <ScalarProperty Name="FoodTypeID" ColumnName="FoodTypeID" />
+          <ScalarProperty Name="FoodTypeName" ColumnName="FoodTypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FoodTrucks">
+      <EntityTypeMapping TypeName="IsTypeOf(FoodTruckModel.FoodTruck)">
+        <MappingFragment StoreEntitySet="FoodTrucks">
+          <ScalarProperty Name="FoodTruckID" ColumnName="FoodTruckID" />
+          <ScalarProperty Name="FoodTruckName" ColumnName="FoodTruckName" />
+          <ScalarProperty Name="FoodTruckPlateNumber" ColumnName="FoodTruckPlateNumber" />
+          <ScalarProperty Name="FoodTypeID" ColumnName="FoodTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Locations">
+      <EntityTypeMapping TypeName="IsTypeOf(FoodTruckModel.Location)">
+        <MappingFragment StoreEntitySet="Locations">
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+          <ScalarProperty Name="LocationAddress" ColumnName="LocationAddress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FoodTruckLocations">
+      <EntityTypeMapping TypeName="IsTypeOf(FoodTruckModel.FoodTruckLocation)">
+        <MappingFragment StoreEntitySet="FoodTruckLocations">
+          <ScalarProperty Name="FoodTruckLocationID" ColumnName="FoodTruckLocationID" />
+          <ScalarProperty Name="FoodTruckLocationDay" ColumnName="FoodTruckLocationDay" />
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="FoodTruckID" ColumnName="FoodTruckID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FoodTypeFoodTruck" TypeName="FoodTruckModel.FoodTypeFoodTruck" StoreEntitySet="FoodTrucks">
+      <EndProperty Name="FoodType">
+        <ScalarProperty Name="FoodTypeID" ColumnName="FoodType_FoodTypeID" />
+      </EndProperty>
+      <EndProperty Name="FoodTruck">
+        <ScalarProperty Name="FoodTruckID" ColumnName="FoodTruckID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="LocationFoodTruckLocation" TypeName="FoodTruckModel.LocationFoodTruckLocation" StoreEntitySet="FoodTruckLocations">
+      <EndProperty Name="Location">
+        <ScalarProperty Name="LocationID" ColumnName="Location_LocationID" />
+      </EndProperty>
+      <EndProperty Name="FoodTruckLocation">
+        <ScalarProperty Name="FoodTruckLocationID" ColumnName="FoodTruckLocationID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FoodTruckFoodTruckLocation" TypeName="FoodTruckModel.FoodTruckFoodTruckLocation" StoreEntitySet="FoodTruckLocations">
+      <EndProperty Name="FoodTruck">
+        <ScalarProperty Name="FoodTruckID" ColumnName="FoodTruck_FoodTruckID" />
+      </EndProperty>
+      <EndProperty Name="FoodTruckLocation">
+        <ScalarProperty Name="FoodTruckLocationID" ColumnName="FoodTruckLocationID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
